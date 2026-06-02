@@ -24,17 +24,13 @@ pipeline {
 
         stage('Scan Backend Image') {
             steps {
-                bat '''
-                trivy image --severity HIGH,CRITICAL multi-tier-backend
-                '''
+                bat '"C:\\Users\\sarve\\AppData\\Local\\Microsoft\\WinGet\\Links\\trivy.exe" image --severity HIGH,CRITICAL --exit-code 1 multi-tier-backend'
                 }
             }
 
         stage('Scan Frontend Image') {
             steps {
-                bat '''
-                trivy image --severity HIGH,CRITICAL multi-tier-frontend
-                '''
+                 bat '"C:\\Users\\sarve\\AppData\\Local\\Microsoft\\WinGet\\Links\\trivy.exe" image --severity HIGH,CRITICAL --exit-code 1 multi-tier-frontend'
             }
         }
         stage('Docker Login') {
