@@ -85,6 +85,7 @@ pipeline {
                     docker tag multi-tier-frontend %DOCKER_USERNAME%/multi-tier-frontend:v1
                     docker push %DOCKER_USERNAME%/multi-tier-frontend:v1
                     '''
+                 }
             }
         }
 
