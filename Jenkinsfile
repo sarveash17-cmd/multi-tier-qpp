@@ -22,18 +22,22 @@ pipeline {
             }
         }
 
-        stage('Scan Backend') {
+        stage('Scan Backend Image') {
             steps {
-                bat 'trivy image multi-tier-backend:latest'
+                bat '''
+                trivy image --severity HIGH,CRITICAL multi-tier-backend
+                '''
+                }
             }
-        }
 
-        stage('Scan Frontend') {
+        stage('Scan Frontend Image') {
             steps {
-                bat 'trivy image multi-tier-frontend:latest'
+                bat '''
+                trivy image --severity HIGH,CRITICAL multi-tier-frontend
+                '''
             }
         }
-                stage('Docker Login') {
+        stage('Docker Login') {
             steps {
                 withCredentials([
                     usernamePassword(
