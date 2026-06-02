@@ -58,7 +58,7 @@ pipeline {
             steps {
 
                 bat '''
-                docker tag multi-tier-backend %DOCKER_USER%/multi-tier-backend:v1
+                docker tag multi-tier-backend %DOCKER_USERNAME%/multi-tier-backend:v1
                 docker push %DOCKER_USER%/multi-tier-backend:v1
                 '''
             }
@@ -68,7 +68,7 @@ pipeline {
             steps {
 
                 bat '''
-                docker tag multi-tier-frontend %DOCKER_USER%/multi-tier-frontend:v1
+                docker tag multi-tier-frontend %DOCKER_USERNAME%/multi-tier-frontend:v1
                 docker push %DOCKER_USER%/multi-tier-frontend:v1
                 '''
             }
