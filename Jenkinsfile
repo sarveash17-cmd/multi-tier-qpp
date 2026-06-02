@@ -56,21 +56,35 @@ pipeline {
 
         stage('Push Backend') {
             steps {
-
-                bat '''
-                docker tag multi-tier-backend %DOCKER_USERNAME%/multi-tier-backend:v1
-                docker push %DOCKER_USER%/multi-tier-backend:v1
-                '''
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'MydockerhubCreds',
+                        usernameVariable: 'DOCKER_USERNAME',
+                        passwordVariable: 'DOCKER_PASSWORD'
+                    )
+                ]) {
+                    bat '''
+                    docker tag multi-tier-backend %DOCKER_USERNAME%/multi-tier-backend:v1
+                    docker push %DOCKER_USERNAME%/multi-tier-backend:v1
+                    '''
+                }
             }
         }
 
         stage('Push Frontend') {
             steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'MydockerhubCreds',
+                        usernameVariable: 'DOCKER_USERNAME',
+                        passwordVariable: 'DOCKER_PASSWORD'
+                    )
+                ]) {
 
-                bat '''
-                docker tag multi-tier-frontend %DOCKER_USERNAME%/multi-tier-frontend:v1
-                docker push %DOCKER_USER%/multi-tier-frontend:v1
-                '''
+                 bat '''
+                    docker tag multi-tier-frontend %DOCKER_USERNAME%/multi-tier-frontend:v1
+                    docker push %DOCKER_USERNAME%/multi-tier-frontend:v1
+                    '''
             }
         }
 
